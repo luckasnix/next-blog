@@ -6,7 +6,7 @@ export default function About() {
     <>
       <h1>Sobre mim</h1>
       <Link href="/">
-        <Button variantColor="green">Volta para a página inicial</Button>
+        <Button variantColor="teal">Volta para a página inicial</Button>
       </Link>
     </>
   )
