@@ -3,8 +3,8 @@ import { Image, Button } from '@chakra-ui/core'
 import styles from './header.module.css'
 
 const routes = [
-  { path: "/", label: "Início" },
-  { path: "/sobre", label: "Sobre" }
+  { path: '/', label: 'Início' },
+  { path: '/sobre', label: 'Sobre' }
 ]
 
 export default function Header() {
