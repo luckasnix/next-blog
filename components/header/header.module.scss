@@ -13,22 +13,19 @@
   grid-auto-flow: column;
   justify-content: space-between;
   align-content: center;
-}
-
-.wrapper img {
-  width: 64px;
-  border-radius: 0.25rem;
-}
-
-.wrapper nav {
-  display: grid;
-  align-content: center;
-}
-
-.wrapper nav ul {
-  list-style: none;
-  display: grid;
-  grid-auto-flow: column;
-  align-content: center;
-  gap: 20px;
+  img {
+    width: 64px;
+    border-radius: 0.25rem;
+  }
+  nav {
+    display: grid;
+    align-content: center;
+    ul {
+      list-style: none;
+      display: grid;
+      grid-auto-flow: column;
+      align-content: center;
+      gap: 20px;
+    }
+  }
 }

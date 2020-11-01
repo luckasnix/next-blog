@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Image, Button } from '@chakra-ui/core'
-import styles from './header.module.css'
+import styles from './header.module.scss'
 
 const routes = [
   { path: '/', label: 'Início' },
