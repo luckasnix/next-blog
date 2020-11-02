@@ -12,7 +12,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.wrapper}>
         <div>
-          <Image size="64px" src="https://via.placeholder.com/64" alt="Foto de perfil"/>
+          <Image size="64px" src="images/foto-perfil.webp" alt="Foto de perfil"/>
         </div>
         <nav>
           <ul>
