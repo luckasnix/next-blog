@@ -1,0 +1,12 @@
+.page {
+  width: 100%;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px;
+  display: grid;
+  justify-content: center;
+  gap: 20px;
+}
