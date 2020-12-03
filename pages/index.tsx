@@ -1,12 +1,11 @@
 import { GetStaticProps } from 'next'
-import { getPostsData } from '../lib/posts'
+import { getSortedPostsData } from '../lib/posts'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const postsData = getPostsData()
-  console.log(postsData)
+  const sortedPostsData = getSortedPostsData()
   return {
     props: {
-      postsData
+      sortedPostsData
     }
   }
 }

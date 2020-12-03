@@ -4,7 +4,13 @@ import matter from 'gray-matter'
 
 const postsDir = path.join(process.cwd(), 'posts')
 
-export function getPostsData() {
+export interface PostFrontMatter {
+  slug: string
+  title: string
+  date: string
+}
+
+export const getSortedPostsData = () => {
   const fileNames = fs.readdirSync(postsDir)
 
   const postsData = fileNames.map(fileName => {
@@ -15,8 +21,14 @@ export function getPostsData() {
     return {
       slug,
       ...matterRes.data
-    }
+    } as PostFrontMatter
   })
 
-  return postsData
+  return postsData.sort((a, b) => {
+    if(a.date < b.date) {
+      return 1
+    } else {
+      return -1
+    }
+  })
 }
