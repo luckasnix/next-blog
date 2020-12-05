@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import Date from '../components/date'
 import { getSortedPostsData, PostFrontMatter } from '../lib/posts'
 import { Heading } from '@chakra-ui/core'
 import styles from '../styles/home.module.scss'
@@ -25,7 +26,7 @@ export default function Home({ sortedPostsData }: HomeProps) {
           {sortedPostsData.map(({ slug, title, date }) => (
             <li key={slug}>
               <Heading as="h2">{title}</Heading>
-              <time>{date}</time>
+              <Date dateString={date}/>
             </li>
           ))}
         </ul>
