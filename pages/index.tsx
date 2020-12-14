@@ -1,7 +1,8 @@
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
 import Date from '../components/date'
 import { getSortedPostsData, PostFrontMatter } from '../lib/posts'
-import { Heading } from '@chakra-ui/core'
+import { Heading, Button } from '@chakra-ui/core'
 import styles from '../styles/home.module.scss'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -27,6 +28,9 @@ export default function Home({ sortedPostsData }: HomeProps) {
             <li key={slug}>
               <Heading as="h2">{title}</Heading>
               <Date dateString={date}/>
+              <Link href="postagem/[slug]" as={`postagem/${slug}`}>
+                <Button variantColor="teal">Ler mais</Button>
+              </Link>
             </li>
           ))}
         </ul>
