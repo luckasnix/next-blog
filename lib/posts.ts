@@ -10,7 +10,7 @@ export interface PostFrontMatter {
   date: string
 }
 
-export const getSortedPostsData = () => {
+export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDir)
 
   const postsData = fileNames.map(fileName => {
@@ -31,4 +31,15 @@ export const getSortedPostsData = () => {
       return -1
     }
   })
+}
+
+export function getPostData(slug: string) {
+  const fullPath = path.join(postsDir,`${slug}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf-8')
+  const matterRes = matter(fileContents)
+
+  return {
+    slug,
+    ...matterRes.data
+  } as PostFrontMatter
 }
