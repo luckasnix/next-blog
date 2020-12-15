@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import remark from 'remark'
+import html from 'remark-html'
 
 const postsDir = path.join(process.cwd(), 'posts')
 
@@ -8,6 +10,10 @@ export interface PostFrontMatter {
   slug: string
   title: string
   date: string
+}
+
+export interface PostData extends PostFrontMatter {
+  contentHtml: string
 }
 
 export function getSortedPostsData() {
@@ -33,13 +39,18 @@ export function getSortedPostsData() {
   })
 }
 
-export function getPostData(slug: string) {
+export async function getPostData(slug: string) {
   const fullPath = path.join(postsDir,`${slug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf-8')
   const matterRes = matter(fileContents)
+  const processedContent = await remark()
+    .use(html)
+    .process(matterRes.content)
+  const contentHtml = processedContent.toString()
 
   return {
     slug,
-    ...matterRes.data
-  } as PostFrontMatter
+    ...matterRes.data,
+    contentHtml
+  } as PostData
 }

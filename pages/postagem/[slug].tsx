@@ -1,12 +1,13 @@
 import { GetServerSideProps } from 'next'
-import { getPostData } from '../../lib/posts'
+import { getPostData, PostData } from '../../lib/posts'
+import Date from '../../components/date'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let { slug } = ctx.params
   if (slug instanceof Array) {
     slug = slug[0]
   }
-  const postData = getPostData(slug)
+  const postData = await getPostData(slug)
 
   return {
     props: {
@@ -15,11 +16,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
-export default function Post({ postData }) {
+export interface PostProps {
+  postData: PostData
+}
+
+export default function Post({ postData }: PostProps) {
   return (
     <>
-      <h1>O slug é: {postData.slug}</h1>
-      <h2>O título é: {postData.title}</h2>
+      <h1>{postData.title}</h1>
+      <Date dateString={postData.date}/>
+      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}/>
     </>
   )
 }
