@@ -1,6 +1,8 @@
 import { GetServerSideProps } from 'next'
 import { getPostData, PostData } from '../../lib/posts'
 import Date from '../../components/date'
+import { Heading } from '@chakra-ui/core'
+import styles from '../../styles/post.module.scss'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let { slug } = ctx.params
@@ -22,10 +24,12 @@ export interface PostProps {
 
 export default function Post({ postData }: PostProps) {
   return (
-    <>
-      <h1>{postData.title}</h1>
-      <Date dateString={postData.date}/>
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}/>
-    </>
+    <div className={styles.page}>
+      <article className={styles.container}>
+        <Heading as="h1">{postData.title}</Heading>
+        <Date dateString={postData.date}/>
+        <div className={styles.contentHtml} dangerouslySetInnerHTML={{ __html: postData.contentHtml }}/>
+      </article>
+    </div>
   )
 }
