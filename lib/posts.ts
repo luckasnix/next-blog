@@ -18,7 +18,6 @@ export interface PostData extends PostFrontMatter {
 
 export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDir)
-
   const postsData = fileNames.map(fileName => {
     const slug = fileName.replace(/\.md$/, '')
     const fullPath = path.join(postsDir, fileName)
@@ -37,6 +36,18 @@ export function getSortedPostsData() {
       return -1
     }
   })
+}
+
+export function getPostSlugs() {
+  const fileNames = fs.readdirSync(postsDir)
+  const slugs = fileNames.map(fileName => {
+    const slug = fileName.replace(/\.md$/, '')
+    return {
+      slug
+    }
+  })
+
+  return slugs
 }
 
 export async function getPostData(slug: string) {

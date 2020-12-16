@@ -1,10 +1,24 @@
-import { GetServerSideProps } from 'next'
-import { getPostData, PostData } from '../../lib/posts'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { getPostData, getPostSlugs, PostData } from '../../lib/posts'
 import Date from '../../components/date'
 import { Heading } from '@chakra-ui/core'
 import styles from '../../styles/post.module.scss'
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slugs = getPostSlugs()
+  const paths = slugs.map(({ slug }) => ({
+    params: {
+      slug
+    }
+  }))
+
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
   let { slug } = ctx.params
   if (slug instanceof Array) {
     slug = slug[0]
